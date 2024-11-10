@@ -28,25 +28,24 @@ namespace StocksPriceServiceExercise.DataManagement
             stocksData = new ConcurrentDictionary<string, StockData>();
         }
 
+        // TODO - consider making this whole process async?
         public void UpdateStocks(IEnumerable<StockData> newStocksData)
         {
-            // TODO - consider if need a lock here due to parallelization between getting existingStock and checking the price
-            // TODO - consider making this whole process async?
             foreach (var newStockData in newStocksData)
             {
                 // Check if the stock already exists in the data - if it is then check if its new price is lowered than the previous (only save if lower)
-                if (stocksData.TryGetValue(newStockData.Name, out var existingStock))
+                // Adjust the value atomically based on a condition
+                stocksData.AddOrUpdate(newStockData.Name, newStockData, (key, existingStockData) =>
                 {
-                    if (existingStock.Price > newStockData.Price)
+                    if (existingStockData.Price > newStockData.Price)
                     {
-                        stocksData[newStockData.Name] = newStockData;
+                        return newStockData;
                     }
-                }
-                // received new stock -> save as is
-                else
-                {
-                    stocksData[newStockData.Name] = newStockData;
-                }
+                    else
+                    {
+                        return existingStockData;
+                    }
+                });
             }    
         }
 
