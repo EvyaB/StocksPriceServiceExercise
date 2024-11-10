@@ -1,4 +1,6 @@
-﻿using System;
+﻿using StocksPriceServiceExercise.DataManagement.DataConsumer;
+using StocksPriceServiceExercise.DataManagement.DataParser;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,5 +13,28 @@ namespace StocksPriceServiceExercise.DataReceiver
     /// </summary>
     internal class DataSourcesManager
     {
+        private List<DataSource> dataSources;
+
+        public DataSourcesManager()
+        {
+            dataSources = new List<DataSource>();
+
+            dataSources.Add(new DataSource(new JsonDataParser(), new FileConsumer(), @"./DataFiles/stocks.json"));
+            dataSources.Add(new DataSource(new JsonDataParser(), new FileConsumer(), @"./DataFiles/stocks.csv"));
+            dataSources.Add(new DataSource(new JsonDataParser(), new FileConsumer(), @"https://testpublicaft.s3.amazonaws.com/stocks_url.json"));
+        }
+
+        public async Task StartGatheringDataAsync()
+        {
+            List<Task> dataSourceTasks = new List<Task>();
+
+            // Start each of the tasks
+            foreach (var dataSource in dataSources) 
+            {
+                dataSourceTasks.Add(dataSource.StartGatheringDataAsync()); 
+            }
+
+            await Task.WhenAll(dataSourceTasks);
+        }
     }
 }
