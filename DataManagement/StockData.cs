@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace StocksPriceServiceExercise.DataManagement
 {
-    internal struct StockData
+    public struct StockData
     {
         public string Name;
         public int Price;

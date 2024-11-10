@@ -1,4 +1,5 @@
-﻿using System;
+﻿using StocksPriceServiceExercise.DataManagement;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,12 +14,12 @@ namespace StocksPriceServiceExercise.Service
     {
         public static int GetLowestPrice(string stock)
         {
-            throw new NotImplementedException();
+            return StocksDataManager.GetInstance.GetStockData(stock).Price;
         }
 
-        public static IDictionary<string, int> GetAllLowestPrices() 
+        public static IDictionary<string, StockData> GetAllLowestPrices() 
         {
-            throw new NotImplementedException();
+            return StocksDataManager.GetInstance.GetAllStocksData();
         }
     }
 }

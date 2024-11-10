@@ -54,5 +54,10 @@ namespace StocksPriceServiceExercise.DataManagement
         {
             return stocksData[stock];
         }
+
+        public IDictionary<string, StockData> GetAllStocksData()
+        {
+            return stocksData.ToDictionary();
+        }
     }
 }
