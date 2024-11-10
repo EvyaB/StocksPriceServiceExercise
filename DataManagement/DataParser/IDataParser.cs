@@ -1,4 +1,5 @@
-﻿using System;
+﻿using StocksPriceServiceExercise.DataManagement;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,6 +12,6 @@ namespace StocksPriceServiceExercise.DataReceiver.DataParser
     /// </summary>
     internal interface IDataParser
     {
-        //public async Task ParseData();
+        public Task<IEnumerable<StockData>> ParseData(string data);
     }
 }
