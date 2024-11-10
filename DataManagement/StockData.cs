@@ -8,8 +8,11 @@ namespace StocksPriceServiceExercise.DataManagement
 {
     public class StockData
     {
-        public string Name;
-        public float Price;
+        [CsvHelper.Configuration.Attributes.Name("Symbol")]
+        public string Name { get; set; }
+
+        [CsvHelper.Configuration.Attributes.Name("Price")]
+        public float Price { get; set; }
 
         internal void ValidateData()
         {

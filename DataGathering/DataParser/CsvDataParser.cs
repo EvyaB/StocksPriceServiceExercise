@@ -14,15 +14,23 @@ namespace StocksPriceServiceExercise.DataManagement.DataParser
             using var reader = new StringReader(data);
             using var csv = new CsvReader(reader, CultureInfo.InvariantCulture);
 
-            var stocksData = new List<StockData>();
-            await foreach (var stock in csv.GetRecordsAsync<StockData>())
+            try
             {
-                stocksData.Add(stock);
+                var stocksData = new List<StockData>();
+                await foreach (var stock in csv.GetRecordsAsync<StockData>())
+                {
+                    stocksData.Add(stock);
+                }
+
+                ValidataStocksData(stocksData);
+
+                return stocksData;
             }
-
-            ValidataStocksData(stocksData);
-
-            return stocksData;
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Failed to parse CSV with error {ex.Message}");
+                throw;
+            }
         }
 
         // Assistant method to report and possibly fix any issues in the data

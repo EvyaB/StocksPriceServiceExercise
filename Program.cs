@@ -13,14 +13,17 @@ class Program
 
         // Test data 
         await Task.Delay(2000);
-        Console.WriteLine($"AAPL price = {StockPriceController.GetLowestPrice("AAPL")}");
+        Console.WriteLine($"AABA price = {StockPriceController.GetLowestPrice("AABA")}");
 
-        Console.WriteLine("========================");
-        foreach (var stock in StockPriceController.GetAllLowestPrices())
-        {
-            Console.WriteLine($"Stock: {stock.Key} Price: {stock.Value.Price}");
-        }
-        Console.WriteLine("========================");
+
+        await Task.Delay(20000);
+        Console.WriteLine($"AABA price = {StockPriceController.GetLowestPrice("AABA")}");
+        //Console.WriteLine("========================");
+        //foreach (var stock in StockPriceController.GetAllLowestPrices())
+        //{
+        //    Console.WriteLine($"Stock: {stock.Key} Price: {stock.Value.Price}");
+        //}
+        //Console.WriteLine("========================");
 
         // Run continously forever
         await gatheringDataTask;

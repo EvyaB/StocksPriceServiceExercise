@@ -1,4 +1,5 @@
-﻿using StocksPriceServiceExercise.DataReceiver.DataConsumer;
+﻿using StocksPriceServiceExercise.DataManagement;
+using StocksPriceServiceExercise.DataReceiver.DataConsumer;
 using StocksPriceServiceExercise.DataReceiver.DataParser;
 using System;
 using System.Collections.Generic;
@@ -45,7 +46,8 @@ namespace StocksPriceServiceExercise.DataReceiver
                 // Parse data into the stocks data
                 var stocksData = await dataParser.ParseDataAsync(rawData);
                 
-                // TODO - Save the stocks data
+                // Save the data
+                StocksDataManager.GetInstance.UpdateStocks(stocksData);
 
                 // Wait before gathering data again
                 await Task.Delay(parsingInterval, ct);
