@@ -4,15 +4,14 @@ namespace StocksPriceServiceExercise.DataManagement.DataConsumer
 {
     internal class FileConsumer : IDataConsumer
     {
-        private readonly string filePath;
-
-        public FileConsumer(string filePath)
+        public async Task<string> GetDataAsync(string filePath)
         {
-            this.filePath = filePath ?? throw new ArgumentNullException("filePath", "Missing path to target json file");
-        }
+            if (filePath == null)
+            {
+                Console.WriteLine("Path to file cannot be empty. Stopping file consumer");
+                return "";
+            }
 
-        public async Task<string> GetDataAsync()
-        {
             // Try to get data from filePath
             try
             {

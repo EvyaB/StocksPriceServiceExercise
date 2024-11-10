@@ -1,25 +1,17 @@
-﻿using Newtonsoft.Json;
-using StocksPriceServiceExercise.DataReceiver.DataConsumer;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using StocksPriceServiceExercise.DataReceiver.DataConsumer;
 
 namespace StocksPriceServiceExercise.DataManagement.DataConsumer
 {
     internal class WebConsumer : IDataConsumer
     {
-        private readonly string targetUri;
-
-        public WebConsumer(string targetUri)
+        public async Task<string> GetDataAsync(string targetUri)
         {
-            this.targetUri = targetUri ?? throw new ArgumentNullException("targetUri", "Missing URI to target");
-        }
+            if (targetUri == null)
+            {
+                Console.WriteLine("Target URI cannot be empty. Stopping web consumer");
+                return "";
+            }
 
-        public async Task<string> GetDataAsync()
-        {
             // Try to get data from the web data source
             try
             {

@@ -9,7 +9,7 @@ namespace StocksPriceServiceExercise.DataManagement.DataParser
 {
     internal class CsvDataParser : IDataParser
     {
-        public async Task<IEnumerable<StockData>> ParseData(string data)
+        public async Task<IEnumerable<StockData>> ParseDataAsync(string data)
         {
             using var reader = new StringReader(data);
             using var csv = new CsvReader(reader, CultureInfo.InvariantCulture);

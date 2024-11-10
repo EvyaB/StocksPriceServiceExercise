@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 namespace StocksPriceServiceExercise.DataReceiver
 {
     /// <summary>
-    /// This class handles receiving and parsing data continously from a single data source
+    /// This class initializes the various DataSources and attach each to a specific data source
     /// </summary>
-    internal class DataReceiver
+    internal class DataSourcesManager
     {
     }
 }

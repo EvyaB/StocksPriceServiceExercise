@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StocksPriceServiceExercise.DataReceiver
+namespace StocksPriceServiceExercise.DataManagement
 {
     /// <summary>
-    /// This class initializes the various DataReceivers and attach each to a specific data source
+    /// Singleton data manager that 
     /// </summary>
     internal class DataManager
     {

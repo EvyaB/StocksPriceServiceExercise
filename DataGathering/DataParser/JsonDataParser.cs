@@ -11,7 +11,7 @@ namespace StocksPriceServiceExercise.DataManagement.DataParser
 {
     internal class JsonDataParser : IDataParser
     {
-        public async Task<IEnumerable<StockData>> ParseData(string data)
+        public async Task<IEnumerable<StockData>> ParseDataAsync(string data)
         {
             // Asynchronously deserialize JSON to List of Stock data
             var stocksData = await Task.Run(() => JsonConvert.DeserializeObject<List<StockData>>(data));
