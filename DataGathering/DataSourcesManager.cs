@@ -19,9 +19,10 @@ namespace StocksPriceServiceExercise.DataReceiver
         {
             dataSources = new List<DataSource>();
 
+            // Consider initializing the data sources through configuration instead of hardcoded here
             dataSources.Add(new DataSource(new JsonDataParser(), new FileConsumer(), @"./DataFiles/stocks.json"));
-            dataSources.Add(new DataSource(new JsonDataParser(), new FileConsumer(), @"./DataFiles/stocks.csv"));
-            dataSources.Add(new DataSource(new JsonDataParser(), new FileConsumer(), @"https://testpublicaft.s3.amazonaws.com/stocks_url.json"));
+            dataSources.Add(new DataSource(new CsvDataParser(), new FileConsumer(), @"./DataFiles/stocks.csv"));
+            dataSources.Add(new DataSource(new JsonDataParser(), new WebConsumer(), @"https://testpublicaft.s3.amazonaws.com/stocks_url.json"));
         }
 
         public async Task StartGatheringDataAsync()
