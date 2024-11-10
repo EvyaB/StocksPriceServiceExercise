@@ -50,9 +50,16 @@ namespace StocksPriceServiceExercise.DataManagement
             }    
         }
 
-        public StockData GetStockData(string stock) 
+        public StockData? GetStockData(string stock)
         {
-            return stocksData[stock];
+            if (stocksData.TryGetValue(stock, out var stockData))
+            {
+                return stockData;
+            }
+            else
+            {
+                return null;
+            }
         }
 
         public IDictionary<string, StockData> GetAllStocksData()

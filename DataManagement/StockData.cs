@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace StocksPriceServiceExercise.DataManagement
 {
-    public struct StockData
+    public class StockData
     {
         public string Name;
-        public int Price;
+        public float Price;
 
         internal void ValidateData()
         {
